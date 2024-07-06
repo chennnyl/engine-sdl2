@@ -1,22 +1,32 @@
+SRC_DIR = src
+OBJ_DIR = obj
+INC_DIR = include
+BIN_DIR = .
+
+EXE = $(BIN_DIR)/out
+SRC = $(wildcard $(SRC_DIR)/*.c)
+OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+
 CC = gcc
-LDFLAGS = -lSDL2
+CPPFLAGS 	= -I$(INC_DIR) -MMD -MP
+CFLAGS 		= -Wall 
+LDLIBS	 	= -lSDL2
+LDFLAGS		=
 
-OUT = out
-OBJ = main.o event.o render.o
+.PHONY: clean all
 
-.PHONY: clean
+all: $(EXE)
 
-$(OUT): $(OBJ)
-	$(CC) -o $(OUT) *.o $(LDFLAGS)
+$(EXE): $(OBJ) | $(BIN_DIR)
+	$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@
+
+$(BIN_DIR) $(OBJ_DIR):
+	mkdir -p $@
 
 clean:
-	rm -rf *.o $(OUT)
+	@$(RM) -rv $(OBJ_DIR)
 
-main.o: main.c main.h event.o render.o
-	$(CC) -o main.o -c main.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	$(CC) $(CPPFLAGS) -c $< -o $@
 
-event.o: event.c event.h main.h
-	$(CC) -o event.o -c event.c
-
-render.o: render.c render.h main.h
-	$(CC) -o render.o -c render.c
+-include $(OBJ:.o=.d)

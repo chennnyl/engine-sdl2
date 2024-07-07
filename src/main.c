@@ -3,10 +3,10 @@
 #include "render.h"
 
 struct GameState state = {};
+struct FontTextures fontTextures = { NULL };
 SDL_Renderer *renderer = NULL;
 
 int main() {
-
 	if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) < 0) {
     SDL_Log("Init error: %s\n", SDL_GetError());
     exit(EX_SOFTWARE);
@@ -27,6 +27,9 @@ int main() {
     exit(EX_SOFTWARE);
   }
 
+  IMG_Init(IMG_INIT_PNG);
+  render_init();
+
   while(true) {
     update();
     if(event_loop() < 0) {
@@ -35,7 +38,9 @@ int main() {
     render();
   }
   
+  quit_render();
   SDL_DestroyRenderer(renderer);
   SDL_DestroyWindow(window);
+  IMG_Quit();
   SDL_Quit();
 }

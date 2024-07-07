@@ -2,6 +2,7 @@
 #define __MAIN_H
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include <stdlib.h>
 #include <sysexits.h>
 #include <stdbool.h>

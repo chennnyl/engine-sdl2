@@ -10,7 +10,7 @@ OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 CC = gcc
 CPPFLAGS 	= -I$(INC_DIR) -MMD -MP
 CFLAGS 		= -Wall 
-LDLIBS	 	= -lSDL2
+LDLIBS	 	= -lSDL2 -lSDL2_image
 LDFLAGS		=
 
 .PHONY: clean all

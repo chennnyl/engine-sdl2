@@ -14,8 +14,8 @@ struct GameState {
 extern struct GameState state;
 extern SDL_Renderer *renderer;
 
-#define SCREEN_WIDTH  640
-#define SCREEN_HEIGHT 480
-
+#define SCREEN_WIDTH  320
+#define SCREEN_HEIGHT 240
+#define SCREEN_SCALE  2
 
 #endif

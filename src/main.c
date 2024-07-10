@@ -14,7 +14,7 @@ int main() {
 
   SDL_Window *window;
   SDL_CreateWindowAndRenderer(
-      SCREEN_WIDTH, SCREEN_HEIGHT,
+      SCREEN_WIDTH*SCREEN_SCALE, SCREEN_HEIGHT*SCREEN_SCALE,
       0,
       &window, &renderer
   );
